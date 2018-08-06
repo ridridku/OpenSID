@@ -1,6 +1,6 @@
 <?php  if(!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Dokumen_Sekretariat extends CI_Controller{
+class Dokumen_sekretariat extends CI_Controller{
 
 	function __construct(){
 		parent::__construct();
@@ -139,6 +139,17 @@ class Dokumen_Sekretariat extends CI_Controller{
 		$this->web_dokumen_model->dokumen_lock($id,2);
 		redirect("dokumen_sekretariat/index/$kat/$p/$o");
 	}
+
+	function dialog_cetak($kat=1)
+	{
+		redirect("dokumen/dialog_cetak/$kat");
+	}
+
+	function dialog_excel($kat=1)
+	{
+		redirect("dokumen/dialog_excel/$kat");
+	}
+
 
 	private function _set_tab($kat){
 		switch ($kat) {

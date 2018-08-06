@@ -1,4 +1,4 @@
-<?php class Surat_Keluar_Model extends CI_Model{
+<?php class Surat_keluar_model extends CI_Model{
 
 	function __construct(){
 		parent::__construct();
@@ -236,11 +236,15 @@
 
 	}
 
-	function grafik(){
-		$sql   = "select round(((jml*100)/(select count(id) from log_surat)),2) as jumlah, nama from (SELECT COUNT(l.id) as jml, f.nama from log_surat l left join tweb_surat_format f on l.id_format_surat=f.id group by l.id_format_surat) as a";
-
-		$query = $this->db->query($sql);
-		$data=$query->result_array();
+	function grafik()
+	{
+		$data = $this->db
+				->select('f.nama, COUNT(l.id) as jumlah')
+				->from('log_surat l')
+				->join('tweb_surat_format f', 'l.id_format_surat=f.id')
+				->group_by('f.nama')
+				->get()
+				->result_array();
 		return $data;
 	}
 
@@ -261,7 +265,8 @@
 
 		if (!$this->db->where('id', $id)->delete('log_surat')) {	// Jika query delete terjadi error
 			$_SESSION['success'] = -1;								// Maka, nilai success jadi -1, untuk memunculkan notifikasi error
-			$_SESSION['error_msg'] = $this->db->error()['message']; // Pesan error ditampung disession
+			$error = $this->db->error();
+			$_SESSION['error_msg'] = $error['message']; // Pesan error ditampung disession
 		}
 	}
 

@@ -1,5 +1,5 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
-class web extends CI_Controller{
+class Web extends CI_Controller{
 
 	function __construct(){
 		parent::__construct();
@@ -69,6 +69,7 @@ class web extends CI_Controller{
 
 		$this->load->view('header', $header);
 		$this->load->view('web/nav',$nav);
+		$data = $this->security->xss_clean($data);
 		$this->load->view('web/artikel/table',$data);
 		$this->load->view('footer');
 	}

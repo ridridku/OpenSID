@@ -12,11 +12,7 @@
   <th class="top">Foto</th>
   <td>
     <div class="userbox-avatar">
-      <?php if($penduduk['foto']){?>
       <img src="<?php echo AmbilFoto($penduduk['foto'])?>" alt=""/>
-      <?php }else{?>
-      <img src="<?php echo base_url()?>assets/files/user_pict/kuser.png" alt=""/>
-      <?php }?>
     </div>
   </td>
   <input type="hidden" name="old_foto" value="<?php echo $penduduk['foto']?>">
@@ -29,7 +25,7 @@
 
 <tr>
   <th width="100">Nama</th>
-  <td><input name="nama" type="text" class="inputbox required" size="60" value="<?php echo strtoupper(unpenetration($penduduk['nama']))?>"/></td>
+  <td><input name="nama" type="text" class="inputbox required" size="60" value="<?php echo strtoupper($penduduk['nama'])?>"/></td>
 </tr>
 
 <tr>
@@ -154,10 +150,6 @@
   </td>
 </tr>
 <tr>
-  <th>Alamat Tempat Lahir </th>
-  <td><input name="alamat_tempat_lahir" type="text" class="inputbox" id="alamat_tempat_lahir" size="100" value="<?php echo $penduduk['alamat_tempat_lahir']?>"/></td>
-</tr>
-<tr>
   <th>Jenis Kelahiran </th>
   <td>
     <div class="uiradio">
@@ -268,7 +260,7 @@
 </tr>
 <tr>
   <th>Nama Ayah</th>
-  <td><input name="nama_ayah" type="text" class="inputbox" size="60"  value="<?php echo strtoupper(unpenetration($penduduk['nama_ayah']))?>"/></td>
+  <td><input name="nama_ayah" type="text" class="inputbox" size="60"  value="<?php echo strtoupper($penduduk['nama_ayah'])?>"/></td>
 </tr>
 <tr>
   <th>NIK Ibu</th>
@@ -276,7 +268,7 @@
 </tr>
 <tr>
   <th>Nama Ibu</th>
-  <td><input name="nama_ibu" type="text" class="inputbox" size="60"  value="<?php echo strtoupper(unpenetration($penduduk['nama_ibu']))?>"/></td>
+  <td><input name="nama_ibu" type="text" class="inputbox" size="60"  value="<?php echo strtoupper($penduduk['nama_ibu'])?>"/></td>
 </tr>
 <tr>
   <th colspan="2" class="bagian">ALAMAT</th>

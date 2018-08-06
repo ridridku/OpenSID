@@ -1,4 +1,4 @@
-<?php class analisis_respon_model extends CI_Model{
+<?php class Analisis_respon_model extends CI_Model{
 	function __construct(){
 		parent::__construct();
 		$this->load->helper('excel');
@@ -678,7 +678,7 @@
 
 		$sql = "SELECT u.* FROM analisis_indikator u WHERE u.id_master = ? ";
 		$sql .= $order_sql;
-		$query 	= $this->db->query($sql,$master);
+		$query 	= $this->db->query($sql,$_SESSION['analisis_master']);
 		$data	= $query->result_array();
 
 		$i=0;
@@ -702,7 +702,7 @@
 
 		$sql = "SELECT u.* FROM analisis_indikator u WHERE u.id_master = ? ";
 		$sql .= $order_sql;
-		$query 	= $this->db->query($sql,$master);
+		$query 	= $this->db->query($sql,$_SESSION['analisis_master']);
 		$data	= $query->result_array();
 
 		$i=0;
@@ -927,13 +927,17 @@
 			if(count($respon)>0)
 				$outp = $this->db->insert_batch('analisis_respon',$respon);
 			else
+			{
 				$outp = false;
+				$_SESSION['error_msg'] = 'Tidak ada data';
+			}
 		}
 
 		$this->pre_update();
 
 		if($outp) $_SESSION['success']=1;
-			else $_SESSION['success']=-1;
+		else
+			$_SESSION['success']=-1;
 	}
 
 	private function respon_checkbox($indi, $isi, $id_subjek, $per, &$respon) {

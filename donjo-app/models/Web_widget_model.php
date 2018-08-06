@@ -1,4 +1,4 @@
-<?php class Web_Widget_Model extends CI_Model{
+<?php class Web_widget_model extends CI_Model{
 
 	function __construct(){
 		parent::__construct();
@@ -9,6 +9,8 @@
 
 	function get_widget($id=''){
 		$data = $this->db->where('id',$id)->get('widget')->row_array();
+		$data['judul'] = htmlentities($data['judul']);
+		$data['isi'] = $this->security->xss_clean($data['isi']);
 		return $data;
 	}
 
@@ -23,11 +25,10 @@
 		$query = $this->db->query($sql);
 		$data  = $query->result_array();
 
-		$i=0;
 		$outp='';
-		while($i<count($data)){
-			$outp .= ",'" .$data[$i]['judul']. "'";
-			$i++;
+		for ($i=0; $i<count($data); $i++)
+		{
+			$outp .= ",'" .$this->security->xss_clean($data[$i]['judul']). "'";
 		}
 		$outp = strtolower(substr($outp, 1));
 		$outp = '[' .$outp. ']';
@@ -107,6 +108,7 @@
 			$i++;
 			$j++;
 		}
+		$data = $this->security->xss_clean($data);
 		return $data;
 	}
 
@@ -315,7 +317,7 @@
 		$data['komen'] = $this->first_artikel_m->komentar_show();
 		$data['sosmed'] = $this->first_artikel_m->list_sosmed();
 		$data['arsip'] = $this->first_artikel_m->arsip_show();
-		$data['aparatur_desa'] = $this->pamong_model->list_data();
+		$data['aparatur_desa'] = $this->pamong_model->list_data(true);
 		$data['stat_widget'] = $this->laporan_penduduk_model->list_data(4);
 		$data['sinergi_program'] = $this->get_setting('sinergi_program');
 	}

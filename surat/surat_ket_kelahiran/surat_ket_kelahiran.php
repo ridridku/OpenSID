@@ -223,6 +223,7 @@
       var i = t.getDay();
       $(this).closest('td').find('[name=hari]').val(hari[i]);
     });
+    $('input[name=tanggallahir]').trigger('change');
 
     /* set nama_sex dari pilihan */
     $('input[name=nama_sex]').val($('#sex').find(':selected').text())
@@ -545,8 +546,8 @@
             </td>
           </tr>
           <tr>
-            <th>Alamat Tempat Lahir </th>
-            <td><input name="alamat_tempat_lahir" type="text" class="inputbox required data_lahir" id="alamat_tempat_lahir" size="100" value="<?php echo $_SESSION['post']['alamat_tempat_lahir']?>"/></td>
+            <th>Tempat Kelahiran </th>
+            <td><input name="tempatlahir" type="text" class="inputbox required data_lahir" id="tempatlahir" size="50" value="<?php echo $_SESSION['post']['tempatlahir']?>"/> <i>*(Nama Kota/Kabupaten)</i></td>
           </tr>
           <tr>
             <th>Jenis Kelahiran </th>
@@ -689,7 +690,7 @@
           <?php endif; ?>
           <tr>
             <th>Hubungan Pelapor dengan Bayi</th>
-            <td><input name="hubungan_pelapor" type="text" class="inputbox required" id="hubungan_pelapor" size="100" value="<?php echo $_SESSION['post']['hubungan_pelapor']?>"/></td>
+            <td><input name="hubungan_pelapor" type="text" class="inputbox required" id="hubungan_pelapor" size="60" value="<?php echo $_SESSION['post']['hubungan_pelapor']?>"/></td>
           </tr>
 
           <!-- SAKSI 1 -->
